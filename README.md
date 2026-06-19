@@ -348,6 +348,51 @@ Em **Web** → **Virtualenv**: `/home/seu-usuario/.virtualenvs/copa2026`
 ### 8. Recarregue
 Clique em **Reload** — seu app estará em `seu-usuario.pythonanywhere.com`.
 
+### 9. Sincronizar com GitHub (deploy automático)
+
+#### Script de deploy
+
+Crie um arquivo `deploy.sh` no console Bash do PythonAnywhere:
+```bash
+cd ~/Copa2026
+git pull origin main
+touch /var/www/seu-usuario_pythonanywhere_com_wsgi.py
+```
+
+Dê permissão de execução:
+```bash
+chmod +x ~/deploy.sh
+```
+
+#### Toda vez que alterar o código no GitHub
+1. Faça `git push` para o GitHub
+2. No PythonAnywhere, abra o **bash** e execute:
+   ```bash
+   ~/deploy.sh
+   ```
+
+#### Opção: agendar atualização automática (plano pago)
+No painel **Web** → **Schedule**:
+- Adicione uma task com frequência (ex: a cada 6 horas)
+- Comando: `bash ~/deploy.sh`
+
+#### Opção: webhook com GitHub Actions
+Crie `.github/workflows/deploy.yml` no seu repositório:
+```yaml
+name: Deploy para PythonAnywhere
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X POST "https://www.pythonanywhere.com/api/v0/user/${{ secrets.PA_USER }}/webapps/${{ secrets.PA_USER }}.pythonanywhere.com/reload/" \
+            -H "Authorization: Token ${{ secrets.PA_TOKEN }}"
+```
+Gere um token de API em **Account** → **API token** no PythonAnywhere e adicione como secret (`PA_TOKEN` e `PA_USER`) no GitHub.
+
 ### Domínio próprio (plano pago)
 No plano **Hacker** ($5/mês):
 - Em **Web** → adicione `ideiasti.com`
