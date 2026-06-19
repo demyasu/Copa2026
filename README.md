@@ -2,7 +2,7 @@
 
 Sistema web em Python para acompanhar a Copa do Mundo FIFA 2026 com 48 seleções, 12 grupos, chaveamento completo, probabilidades para apostas e exportação para planilha.
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Flask](https://img.shields.io/badge/Flask-3.0-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
@@ -66,7 +66,7 @@ copa2026/
 
 ### Requisitos
 
-- Python 3.10 ou superior
+- Python 3.11 ou superior
 - Pip
 
 ### Passos
@@ -321,13 +321,13 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 
 ### 4. Crie virtualenv e instale dependências
 ```bash
-mkvirtualenv --python=python3.10 copa2026
+mkvirtualenv --python=python3.11 copa2026
 pip install -r requirements.txt
 ```
 
 ### 5. Configure o Web App
 - Vá em **Web** → **Add a new web app**
-- Escolha **Manual configuration** → **Python 3.10**
+- Escolha **Manual configuration** → **Python 3.11**
 - Em **Code**:
   - **Source code**: `/home/seu-usuario/copa2026/`
   - **Working directory**: `/home/seu-usuario/copa2026/`
